@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <title alt="Sistema Supervisor Lista">Sistema Supervisor Lista</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/Style_Sis_Supervisor_Lis.css">
+
+        <!-- CSS Tabla -->
+        <link rel="stylesheet" href="/css/bootstrap.table.css">
+        <!-- CSS Tabla -->
+    </head>
+
+    <body id="body">
+
+        <!-- Header -->
+        <header id="cabecera" class="row" th:replace="layout/plantilla :: header_super"></header>
+
+        <!-- Aside -->
+        <aside class=" menu" id="menu_side" th:replace="layout/plantilla :: aside_supervisor"></aside>
+
+        <!-- Main -->
+        <main id="contenedor-principal" class="contenedor-principal">
+            <section id="contenedor">
+                <div id="contenedor-div">
+                    <h2 class="">LISTA DE PEDIDOS</h2>
+                    <hr>
+                </div>
+                <div id="contenedor-div" th:if="${pedidos != null and !pedidos.empty}">
+                    <table id="example" class="table table-striped" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Estado</th>
+                                <th>Tipo Pedido</th>
+                                <th>Fecha Carga</th>
+                                <th>Fecha Aprobado</th>
+                                <th>Interventor</th>
+                                <th>Total</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="pedido : ${pedidos}">
+                                <td th:text="${pedido.getId_pedido()}"></td>
+                                <td th:text="${pedido.getNombre()}"></td>
+                                <td th:style="${pedido.getEstado()=='Pendiente' ? 'background-color:#FE9A05;' : 'background-color:#158C0B;color:white;'}" th:text="${pedido.getEstado()}"></td>
+                                <td th:text="${pedido.toString()}"></td>
+                                <td th:text="${pedido.getFecha_carga()}"></td>
+                                <td th:text="${pedido.getFecha_aprobacion()!=null} ? ${pedido.getFecha_aprobacion()} : 'Vacio'"></td>
+                                <td th:text="${pedido.getInterventor()!=null} ? ${pedido.getInterventor().toString()} : 'Vacio'"></td>
+                                <td th:text="${pedido.getTotal_pedido()}"></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button id="dropdown-button" class="btn btn-secondary dropdown-toggle" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                            Opciones
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                            <li><a class="dropdown-item" th:href="@{/verPedidoSuper/} + ${pedido.getId_pedido()}">Ver</a></li>
+                                            <li th:if="${pedido.getEstado()!='Aprobado'}"><a class="dropdown-item" th:href="@{/eliminarPedidoSuper/}+ ${pedido.getId_pedido()}">Eliminar</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div th:if="${pedidos == null or pedidos.empty}" class="alert alert-danger" role="alert">
+                    No hay pedidos registrados en el sistema. 
+                </div>
+            </section>
+        </main>
+
+        <footer id="footer">
+            <h4 class="titulo-final ">&copy; SISTEMA DE PEDIDOS 2021</h4>
+        </footer>
+
+
+        <script type="text/javascript" src="/js/popper.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="/js/menu.js"></script>
+
+        <!-- JS Tabla -->
+        <script type="text/javascript" src="/js/jquery.datatable.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.table.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#example').DataTable();
+            });
+        </script>
+        <!-- JS Tabla -->
+    </body>
+
+</html>

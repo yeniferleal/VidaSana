@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title alt="Iniciar Sesión">Recuperar Contraseña</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/Style_Olvide_Contra.css">
+
+</head>
+
+<body>
+  <section class="contenedor-principal">
+    <h3>RECUPERAR CONTRASEÑA</h3>
+    <form class="formulario" method="post" th:action="@{/}" name="formulario">
+      <img src="/img/padlock.png" alt="">
+      <div class="contenedor-div">
+        <label for="email" class="">Ingresa el Correo:</label>
+        <div class="contenedor-email">
+            <input type="email" class="" id="email" required="true">
+        </div>
+      </div>
+      <div class="contenedor-div">
+        <a th:href="@{/sign_in}" class="link-primary">Registrarse</a>
+        <a th:href="@{/}" class="link-primary">Volver al Inicio</a>
+      </div>
+      <button type="button" class="" onclick="olvidarContrasenia()">Enviar</button>
+    </form>
+  </section>
+
+  <script type="text/javascript" src="/js/popper.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="/js/validaciones.js"></script>
+</body>
+
+</html>

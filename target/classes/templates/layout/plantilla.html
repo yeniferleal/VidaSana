@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <!-- HEADER PARA EL ADMINISTRADOR -->
+    <header id="cabecera" class="row" th:fragment="header_admin">
+        <nav class="col-12">
+            <span class="nav-span1 col-4">
+                <h3 class="texto-nav" id="texto-nav" data-desktoptext="VIDA SANA" data-tablettext="VIDA SANA"
+                    data-phonetext="VD"></h3>
+                <figure class="nav-menu-button my-auto"><img onclick="menu()" id="btn_open" src="/img/icons/menu.svg"
+                        alt="menu" height="30px" class="menu-button">
+                </figure>
+            </span>
+            <div class="col-1"></div>
+            <span class="nav-span2 col-7">
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <figure class="nav-figure"><img class="nav_user_img" id="img_nav" src="/img/icons/user-icon.svg"
+                                alt="user"></figure>
+                        <p th:text="${usuario.getNombre()}+' '+${usuario.getApellido()}">USER</p>
+                    </button>
+                    <ul class="dropdown-menu contenedor-ul" aria-labelledby="dropdownMenuButton1">
+                        <li id="sub-dropdown" class="dropdown">
+                            <a href="#" class="dropdown-item">Cambiar Rol</a>
+                            <ul id="sub-dropdown-menu" class="dropdown-menu">
+                                <li value="ADMINISTRADOR" th:each='rol : ${usuario.getRoles()}'
+                                    th:if="${rol.getTipo_rol().equals('ROLE_ADMINISTRADOR')}"><a
+                                        th:href="@{/Sis_Administrador_Prin}" class="dropdown-item"
+                                        th:text='${rol.toString()}'></a></li>
+                                <li value="USUARIO" th:each='rol : ${usuario.getRoles()}'
+                                    th:if="${rol.getTipo_rol().equals('ROLE_USUARIO')}"><a
+                                        th:href="@{/Sis_Usuario_Prin}" class="dropdown-item"
+                                        th:text='${rol.toString()}'></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <form class="d-flex justify-content-center" method="post" th:action="@{/logout}"><input
+                                    class="dropdown-item" type="submit" name="name" value="Cerrar Sesión"></form>
+                        </li>
+                    </ul>
+                </div>
+            </span>
+        </nav>
+    </header>
+    <!-- ASIDE PARA EL ADMINISTRADOR -->
+    <aside class="menu" id="menu_side" th:fragment="aside_admin">
+        <div class=" menu-div" id="menu-div">
+            <div>
+                <figure class="menu-figure mx-auto" id="menu-figure"><img class="user-aside_img" id="img_menu"
+                        src="/img/icons/user-icon.svg" alt="user-Aside"></figure>
+            </div>
+            <div id="menu_info">
+                <h4 class="menu-text-user" th:value="${usuario.getNombre()}+' '+${usuario.getApellido()}"></h4>
+                <h5 class="menu-cargo" value="ADMINISTRADOR"></h5>
+                <h6 class="menu-text-email"><a class="menu-text-email-a" th:value="${usuario.getUsername()}"
+                        th:href="'mailto:'+${usuario.getUsername()}"></a></h6>
+            </div>
+            <hr>
+            <ul class="list-unstyled components menu-ul">
+                <li class="menu-li">
+                    <img src="/img/icons/home-menu.svg" alt="home" height="30px" title="INICIO">
+                    <a th:href="@{/Sis_Administrador_Prin}" class="d-block menu-a" id="menu-a" aria-hidden="true"
+                        value="INICIO"></a>
+                </li>
+                <li class="menu-li">
+                    <img src="/img/icons/planes.svg" alt="home" height="30px" title="PLANES ALIMENTARIOS">
+                    <a th:href="@{/Sis_Administrador_Planes}" class="d-block menu-a" id="menu-a" aria-hidden="true"
+                        value="PLANES ALIMENTARIOS"></a>
+                </li>
+                <li class="menu-li">
+                    <img src="/img/icons/actividades.svg" alt="home" height="30px" title="ACTIVIDADES FISICAS">
+                    <a th:href="@{/Sis_Administrador_Actividades}" class="d-block menu-a" id="menu-a" aria-hidden="true"
+                        value="ACTIVIDADES FISICAS"></a>
+                </li>
+                <li class="menu-li">
+                    <img src="/img/icons/add-user.svg" alt="home" height="30px" title="GESTIONAR REGISTROS DE USUARIO">
+                    <a th:href="@{/Sis_Administrador_GesReg}" class="d-block menu-a" id="menu-a" aria-hidden="true"
+                        value="GESTIONAR REGISTROS"></a>
+                </li>
+                <li class="menu-li">
+                    <img src="/img/icons/gestion-user.svg" alt="home" height="30px" title="GESTIONAR USUARIOS">
+                    <a th:href="@{/Sis_Administrador_GesUs}" class="d-block menu-a" id="menu-a" aria-hidden="true"
+                        value="GESTIONAR USUARIOS"></a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- HEADER PARA EL USUARIO -->
+    <header id="cabecera" class="row" th:fragment="header_user">
+        <nav class="col-12">
+            <span class="nav-span1 col-4">
+                <h3 class="texto-nav" id="texto-nav" data-desktoptext="VIDA SANA" data-tablettext="VIDA SANA"
+                    data-phonetext="VD"></h3>
+                <figure class="nav-menu-button my-auto"><img onclick="menu()" id="btn_open" src="/img/icons/menu.svg"
+                        alt="menu" height="30px" class="menu-button">
+                </figure>
+            </span>
+            <div class="col-1"></div>
+            <span class="nav-span2 col-7">
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <figure class="nav-figure"><img class="nav_user_img" id="img_nav" src="/img/icons/user-icon.svg"
+                                alt="user"></figure>
+                        <p th:text="${usuario.getNombre()}+' '+${usuario.getApellido()}">USER</p>
+                    </button>
+                    <ul class="dropdown-menu contenedor-ul" aria-labelledby="dropdownMenuButton1">
+                        <li id="sub-dropdown" class="dropdown">
+                            <a href="#" class="dropdown-item">Cambiar Rol</a>
+                            <ul id="sub-dropdown-menu" class="dropdown-menu">
+                                <li value="ADMINISTRADOR" th:each='rol : ${usuario.getRoles()}'
+                                    th:if="${rol.getTipo_rol().equals('ROLE_ADMINISTRADOR')}"><a
+                                        th:href="@{/Sis_Administrador_Prin}" class="dropdown-item"
+                                        th:text='${rol.toString()}'></a></li>
+                                <li value="USUARIO" th:each='rol : ${usuario.getRoles()}'
+                                    th:if="${rol.getTipo_rol().equals('ROLE_USUARIO')}"><a
+                                        th:href="@{/Sis_Usuario_Prin}" class="dropdown-item"
+                                        th:text='${rol.toString()}'></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <form class="d-flex justify-content-center" method="post" th:action="@{/logout}"><input
+                                    class="dropdown-item" type="submit" name="name" value="Cerrar Sesión"></form>
+                        </li>
+                    </ul>
+                </div>
+            </span>
+        </nav>
+    </header>
+    <!-- ASIDE PARA EL USUARIO -->
+    <aside class="menu" id="menu_side" th:fragment="aside_user">
+        <div class=" menu-div" id="menu-div">
+            <div>
+                <figure class="menu-figure mx-auto" id="menu-figure"><img class="user-aside_img" id="img_menu"
+                        src="/img/icons/user-icon.svg" alt="user-Aside"></figure>
+            </div>
+            <div id="menu_info">
+                <h4 class="menu-text-user" th:value="${usuario.getNombre()}+' '+${usuario.getApellido()}"></h4>
+                <h5 class="menu-cargo" value="USUARIO"></h5>
+                <h6 class="menu-text-email"><a class="menu-text-email-a" th:value="${usuario.getUsername()}"
+                        th:href="'mailto:'+${usuario.getUsername()}"></a></h6>
+            </div>
+            <hr>
+            <ul class="list-unstyled components menu-ul">
+                <li class="menu-li">
+                    <img src="/img/icons/home-menu.svg" alt="home" height="30px" title="INICIO">
+                    <a th:href="@{/Sis_Usuario_Prin}" class="d-block menu-a" id="menu-a" aria-hidden="true"
+                        value="INICIO"></a>
+                </li>
+                <li class="menu-li">
+                    <img src="/img/icons/guia_alimentaria.svg" alt="home" height="30px" title="GUIA ALIMENTARIA">
+                    <a th:href="@{/Usu_Guia_Alimentaria}" class="d-block menu-a" id="menu-a" aria-hidden="true"
+                        value="GUIA ALIMENTARIA"></a>
+                </li>
+                <li class="menu-li">
+                    <img src="/img/icons/etiquetas.svg" alt="home" height="30px" title="GUIA ETIQUETAS">
+                    <a th:href="@{/Usu_Guia_Etiquetas}" class="d-block menu-a" id="menu-a" aria-hidden="true"
+                        value="GUIA ETIQUETAS"></a>
+                </li>
+                <li class="menu-li">
+                    <img src="/img/icons/cambio_habitos.svg" alt="home" height="30px" title="CAMBIO DE HABITOS">
+                    <a th:href="@{/Usu_Cambio_Habitos}" class="d-block menu-a" id="menu-a" aria-hidden="true"
+                        value="CAMBIO DE HABITOS"></a>
+                </li>
+                <li class="menu-li">
+                    <img src="/img/icons/personas.svg" alt="home" height="35px" title="NIÑOS">
+                    <a th:href="@{/Sis_Usuario_Personas}" class="d-block menu-a" id="menu-a" aria-hidden="true"
+                        value="NIÑOS(AS)"></a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <footer id="footer" th:fragment="footer">
+        <h4 class="titulo-final ">&copy; CRECIENDO DE MANERA DISTINTA Y SANA</h4>
+    </footer>
+</body>
+
+</html>

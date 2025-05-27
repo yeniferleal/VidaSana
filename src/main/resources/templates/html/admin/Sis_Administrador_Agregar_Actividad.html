@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title alt="Registrar Niños">Registrar Niños</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/Style_Plantilla.css">
+    <link rel="stylesheet" href="/css/Style_Sis_Prin.css">
+
+    <!-- CSS Tabla -->
+    <link rel="stylesheet" href="/css/bootstrap.table.css">
+    <!-- CSS Tabla -->
+</head>
+
+<body id="body">
+
+    <!-- Header -->
+    <template th:replace="layout/plantilla :: header_admin"></template>
+
+    <!-- Aside -->
+    <template class=" menu" id="menu_side" th:replace="layout/plantilla :: aside_admin"></template>
+
+    <!-- Main -->
+    <main id="contenedor-principal" class="contenedor-principal">
+        <div id="contenedor">
+            <div id="contenedor-div">
+                <h2 class="">AGREGAR NIÑO(A)</h2>
+                <hr>
+                
+                <div th:if="${errores != null}">
+                    <div class="alert alert-danger" role="alert">[[${errores}]]</div>
+                    <button type="button" class="btn btn-primary p-1 mt-2"
+                        th:onClick="location.href='/Sis_Usuario_Agregar_Persona'">Volver</button>
+                </div>
+                <div class="row justify-content-center" th:if="${errores == null}">
+                    <form class="form col-8" th:action="@{/guardarPersona}" method="post" th:object="${persona}">
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="apellido" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" id="apellido" th:field="*{apellido}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fecha_nacimiento" class="form-label">Fecha Nacimiento</label>
+                            <input type="date" class="form-control" id="fecha_nacimiento" th:field="*{fecha_nacimiento}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="genero" class="form-label">Genero</label>
+                            <select id="genero" class="form-select" th:field="*{genero}" required>
+                                <option value="" selected hidden>Seleccione una opción</option>
+                                <option value="M">MASCULINO</option>
+                                <option value="F">FEMENINO</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edad" class="form-label">Edad (Años)</label>
+                            <input type="number" class="form-control" id="edad" th:field="*{edad}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="peso" class="form-label">Peso (KG)</label>
+                            <input type="number" class="form-control" id="peso" th:field="*{peso}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="altura" class="form-label">Altura (CM)</label>
+                            <input type="number" class="form-control" id="altura" th:field="*{altura}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="grado_escolaridad" class="form-label">Grado Escolaridad</label>
+                            <select id="grado_escolaridad" class="form-select" th:field="*{grado_escolaridad}" required>
+                                <option value="" selected hidden>Seleccione una opción</option>
+                                <option value="1">PRIMER GRADO</option>
+                                <option value="2">SEGUNDO GRADO</option>
+                                <option value="3">TERCER GRADO</option>
+                                <option value="4">CUARTO GRADO</option>
+                                <option value="5">QUINTO GRADO</option>
+                                <option value="6">SEXTO GRADO</option>
+                                <option value="7">SEPTIMO GRADO</option>
+                                <option value="8">OCTAVO GRADO</option>
+                                <option value="9">NOVENO GRADO</option>
+                                <option value="10">DECIMO GRADO</option>
+                                <option value="11">UNDECIMO GRADO</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="alergias" class="form-label">Alergias</label>
+                            <textarea type="text" class="form-control" id="alergias" th:field="*{alergias}" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary p-1">AGREGAR</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <template th:replace="layout/plantilla :: footer"></template>
+
+    <script type="text/javascript" src="/js/popper.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/js/menu.js"></script>
+
+    <!-- JS Tabla -->
+    <script type="text/javascript" src="/js/jquery.datatable.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.table.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tabla-pedido').DataTable();
+        });
+    </script>
+    <!-- JS Tabla -->
+</body>
+
+</html>

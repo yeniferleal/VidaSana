@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <title alt="Sistema Supervisor Cargar Pedido">Supervisor Cargar Pedido</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/Style_Sis_Supervisor_CarPed.css">
+
+        <!-- CSS Tabla -->
+        <link rel="stylesheet" href="/css/bootstrap.table.css">
+        <!-- CSS Tabla -->
+
+    </head>
+
+    <body id="body">
+
+        <!-- Header -->
+        <header id="cabecera" class="row" th:replace="layout/plantilla :: header_super"></header>
+
+        <!-- Aside -->
+        <aside class=" menu" id="menu_side" th:replace="layout/plantilla :: aside_supervisor"></aside>
+
+        <!-- Main -->
+        <main id="contenedor-principal" class="contenedor-principal">
+
+            <section id="contenedor">
+                <div>
+                    <h2 class="">CARGAR PEDIDO</h2>
+                    <hr>
+                </div>
+                <div class="d-flex">
+                    <div id="contenedor-form">
+                        <div th:if="${errores_ped != null}" >    
+                            <div class="alert alert-danger" role="alert">[[${errores_ped}]]</div>
+                            <button type="button"  class="btn btn-primary p-1 mt-2" th:onClick="location.href='/Sis_Supervisor_CargarPedido/0'">Volver</button>
+                        </div>
+                        <form name="form_pedido" th:if="${errores_ped == null}" class="form-pedido mb-2" th:action="@{/guardarPedido}" method="post" th:object="${pedido}">
+                            <div id="id_pedido" th:field="*{id_pedido}" hidden></div>
+                            <div class="mb-1">
+                                <input type="text" class="form-control input" th:field="*{nombre}" id="nombre-pedido" placeholder="NOMBRE DEL PEDIDO" required="true">
+                            </div>
+                            <div class="mb-1">
+                                <select id="select-tipo" class="form-select" th:field="*{tipo_pedido}" required="true">
+                                    <option value="0" hidden>TIPO</option>
+                                    <option value="1">REGULAR</option>
+                                    <option value="2">MAQUINARIA EXPRESS</option>
+                                    <option value="3">KIT MENSUAL</option>
+                                    <option value="4">KIT TRIMESTRAL</option>
+                                    <option value="5">PEDIDOS ADICIONALES - 1</option>
+                                    <option value="6">PEDIDOS ADICIONALES - 2</option>
+                                </select>
+                            </div>
+                            <div class="contenedor-buttons">
+                                <button type="submit" id="crear_pedido" class=" btn-primary p-1">CREAR PEDIDO</button>
+                            </div>
+                        </form>
+                        <div th:if="${errores_ins != null}" >    
+                            <div class="alert alert-danger" role="alert">[[${errores_ins}]]</div>
+                            <button type="button"  class="btn btn-primary p-1 mt-2" th:onClick="location.href='/Sis_Supervisor_CargarPedido/0'">Volver</button>
+                        </div>
+                        <form name="form_insumos" th:if="${errores_ins == null}" class="form-insumos mb-2" th:action="@{/guardarInsumo/}+${pedido.getId_pedido()}" method="post" th:object="${insumo}" hidden>
+                            <div class="mb-2">
+                                <input type="text" class="form-control input" id="descripcion-insumo" placeholder="DESCRIPCIÓN" th:field="*{descripcion}" required>
+                            </div>
+                            <div class="mb-2">
+                                <select id="select-punto" class="form-select" required="true" th:field="*{punto}">
+                                    <option value="" selected hidden>Punto</option>
+                                    <option th:each="punto : ${puntos}" th:value="${punto.getId_punto()}">[[${punto.getNombre()}]] - Punto</option>
+                                </select>
+                            </div>
+                            <div class="input-group mb-2">
+                                <input id="cantidad-insumo" type="number" th:field="*{cantidad}" class="form-control input" placeholder="CANTIDAD" required>
+                                <button class="btn btn-outline-secondary" type="button" onclick="more()"><img src="/img/icons/plus-solid.svg" alt="más" height="15px"></button>
+                                <button class="btn btn-outline-secondary" type="button" onclick="less()"><img src="/img/icons/minus-solid.svg" alt="menos" height="15px"></button>
+                            </div>
+                            <div class="input-group mb-2">
+                                <span class="input-group-text">$</span>
+                                <input type="number" class="form-control input" th:field="*{precio}" placeholder="PRECIO UNITARIO">
+                                <span class="input-group-text">.00</span>
+                            </div>
+                            <div class="contenedor-buttons">
+                                <button type="submit" id="crear_insumo" class="btn-primary p-1">AGREGAR INSUMO</button>
+                            </div>
+                        </form>
+                        <div class="contenedor-buttons">
+                            <button type="button" id="eliminar_pedido" class=" btn-primary p-1" th:attr="onclick=|location.href='/eliminarPedidoSuper/'+${pedido.getId_pedido()}|" hidden>ELIMINAR</button>
+                        </div>
+                    </div>
+                    <div id="contenedor-div" th:if="${insumos != null and !insumos.empty}">
+                        <table id="table-insumos" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Insumo</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio Unitario</th>
+                                    <th>Punto</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody">
+                                <tr th:each="insumo : ${insumos}">
+                                    <td>[[${insumo.descripcion}]]</td>
+                                    <td>[[${insumo.cantidad}]]</td>
+                                    <td>[[${insumo.precio}]]</td>
+                                    <td>[[${insumo.getPunto().getId_punto()+' - '+insumo.getPunto().getNombre()}]]</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div th:if="${insumos == null or insumos.empty}" class="alert alert-danger" role="alert">
+                        No hay insumos registrados en el pedido. 
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+
+        <footer id="footer">
+            <h4 class="titulo-final ">&copy; SISTEMA DE PEDIDOS 2021</h4>
+        </footer>
+
+
+        <script type="text/javascript" src="/js/popper.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+
+
+        <!-- JS Tabla -->
+        <script type="text/javascript" src="/js/jquery.datatable.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.table.js"></script>
+        <script type="text/javascript" src="/js/menu.js"></script>
+        <script type="text/javascript">
+                                    $(document).ready(function () {
+                                        $('#table-insumos').DataTable();
+                                    });
+        </script>
+        <!-- JS Tabla -->
+
+    </body>
+
+</html>

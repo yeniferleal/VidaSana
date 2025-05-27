@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <title alt="Sistema Administrador Principal">Sistema Administrador Principal</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/Style_Plantilla.css">
+        <link rel="stylesheet" href="/css/Style_Sis_Prin.css">
+    </head>
+
+    <body id="body">
+        
+        <!-- Header -->
+        <template th:replace="layout/plantilla :: header_admin"></template>
+        
+        <!-- Aside -->
+        <template th:replace="layout/plantilla :: aside_admin"></template>
+        
+        <!-- Main -->
+        <main id="contenedor-principal" class="contenedor-principal"> 
+
+            <section id="contenedor">
+                <div id="contenedor-div">
+                    <h2 class="">INICIO</h2>
+                    <hr>
+                    <section class="contenedor-div-section" id="contenedor-div-section">
+                        <div class="div-figure">
+                            <figure class="contenedor-figure">
+                                <img id="user_img" src="/img/icons/user-icon.svg"  alt="user">
+                            </figure>
+                        </div>
+                        <div class="div-info">
+                            <h1 class="">ADMINISTRADOR</h1>
+                            <h3 class="" th:text="${usuario.getNombre()+' '+usuario.getApellido()}"></h3>
+                            <h5 class=""><a th:href="'mailto:'+${usuario.getUsername()}" th:text="${usuario.getUsername()}"></a></h5>
+                        </div>
+                    </section>
+                    <hr>
+                </div>
+
+            </section>
+        </main>
+        
+        <template th:replace="layout/plantilla :: footer"></template>
+        
+        <script type="text/javascript" src="/js/popper.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="/js/menu.js"></script>
+    </body>
+
+</html>

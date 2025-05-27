@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title alt="Guia Etiquetas">Guia Etiquetas</title>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/Style_Plantilla.css">
+	<link rel="stylesheet" href="/css/Style_Page.css">
+</head>
+
+<body id="body">
+
+	<!-- Header -->
+	<template th:replace="layout/plantilla :: header_user"></template>
+
+	<!-- Aside -->
+	<template th:replace="layout/plantilla :: aside_user"></template>
+
+	<!-- Main -->
+	<main id="contenedor-principal" class="contenedor-principal">
+
+		<section id="contenedor">
+			<div id="contenedor-div">
+				<h2 class="">GUIA ETIQUETAS</h2>
+				<hr>
+				<section class="contenedor-div-section" id="contenedor-div-section">
+					<h4>Etiquetas</h4>
+					<br>
+					<h6>¿Qué son los sellos de advertencia en los alimentos y por qué son importantes?</h6>
+					<br>
+					<p>
+						Los sellos de advertencia nutricional son símbolos colocados en la parte frontal de los productos procesados y ultraprocesados. Su objetivo es informar rápida y claramente a los consumidores cuando un alimento contiene altos niveles de ingredientes críticos como azúcar, sodio, grasas saturadas o edulcorantes.
+					</p>
+
+					<ul>
+						<li>Alto en Azúcares:</li>
+						<p>El azúcar añadido es uno de los ingredientes más comunes en productos procesados. Sin embargo, su exceso puede generar adicción al sabor dulce, dañar los dientes, alterar el metabolismo y llevar a una acumulación de grasa. Este sello advierte al consumidor que el producto podría ser perjudicial si se consume con frecuencia.</p>
+						<img class="img_small" src="/img/pages/guia_etiquetas/etiqueta_1.png" alt="etiqueta_1">
+						<li>Alto en Sodio:</li>
+						<p>El sodio, presente principalmente en la sal, es necesario en pequeñas cantidades. Pero en exceso puede causar presión arterial alta, lo que aumenta el riesgo de accidentes cerebrovasculares y enfermedades cardíacas. Este sello busca frenar el consumo excesivo de alimentos muy salados, como sopas instantáneas, embutidos y snacks.</p>
+						<img class="img_small" src="/img/pages/guia_etiquetas/etiqueta_2.png" alt="etiqueta_2">
+						<li>Alto en Grasas Saturadas:</li>
+						<p>Las grasas saturadas, comunes en productos fritos, empaquetados o de origen animal, pueden aumentar el colesterol malo (LDL) y causar obstrucción de arterias. Este sello alerta al consumidor para que limite su consumo, ya que una dieta rica en estas grasas se relaciona con infartos y otros problemas del corazón.</p>
+						<img class="img_small" src="/img/pages/guia_etiquetas/etiqueta_3.png" alt="etiqueta_3">
+						<li>Contiene Edulcorantes:</li>
+						<p>Los edulcorantes artificiales se usan para reemplazar el azúcar sin aportar calorías. Aunque parecen una buena opción, estudios han demostrado que su uso frecuente puede afectar la flora intestinal y el metabolismo. Por eso, este sello advierte especialmente que no se recomienda su consumo en niños, quienes son más vulnerables a sus efectos. </p>
+						<img class="img_small" src="/img/pages/guia_etiquetas/etiqueta_4.png" alt="etiqueta_4">
+					</ul>
+
+					<p>¿Por qué debemos prestar atención a estos sellos?</p>
+					<p>Estos sellos son como semáforos nutricionales. No te dicen “no comas esto”, pero sí te dicen:</p>
+					<p>“¡Cuidado! Este producto puede ser dañino si lo consumes con frecuencia”.</p>
+					<p>Tener esta información al frente del empaque permite educar desde el mercado, y ayuda a construir una relación más crítica y saludable con la comida.</p>
+				</section>
+				<hr>
+			</div>
+
+		</section>
+	</main>
+
+	<template th:replace="layout/plantilla :: footer"></template>
+
+	<script type="text/javascript" src="/js/popper.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.js"></script>
+	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+	<script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="/js/menu.js"></script>
+</body>
+
+</html>

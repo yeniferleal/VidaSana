@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title alt="Iniciar Sesión">Iniciar Sesión</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/Style_Login.css">
+    </head>
+
+    <body>
+        <section class="contenedor-principal">
+            <h3>Iniciar Sesión</h3>
+            <form class="formulario" method="post" th:action="@{/login}">
+                <div class="contenedor-div">
+                    <label for="username" class="">USUARIO</label>
+                    <div class="contenedor-email">
+                        <input type="text" id="username" name="username">
+                    </div>
+                </div>
+                <div class="contenedor-div">
+                    <label for="password" class="">CONTRASEÑA</label>
+                    <div class="contenedor-password">
+                        <input type="password" id="password" name="password">
+                        <div class="figure-password">
+                            <img id="password-eye" onclick="verContraseña()" src="/img/icons/eye-slash-regular.svg" alt="ver contraseña" height="15px">
+                        </div>
+                    </div>
+                </div>
+                <div class="contenedor-div">
+                    <a th:href="@{/sign_in}" class="link-primary">Registrarse</a>
+                    <a th:href="@{/Olvide_Contrasenia}" class="link-primary">Olvidé mi contraseña</a>
+                </div>
+                <button type="submit" name="name">ENTRAR</button>
+            </form>
+        </section>
+
+        <script type="text/javascript" src="/js/popper.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="/js/validaciones.js"></script>
+    </body>
+
+</html>

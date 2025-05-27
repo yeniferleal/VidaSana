@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title alt="Registrar Usuario">Registrar Usuario</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/Style_Registrar_User.css">
+
+    <body>
+        <section class="contenedor-principal">
+            <h3>REGISTRAR</h3>
+            <form class="formulario" id="form_registrar" th:action="@{/Guardar_Solicitud}" name="formulario" method="post" enctype="multipart/form-data"  th:object="${usuario}">
+                <div class="contenedor-div">
+                    <label for="nombre" class="">NOMBRES</label>
+                    <div class="">
+                        <input type="text" class=" input" id="nombre" th:field="*{nombre}" required>
+                    </div>
+                </div>
+                <div class="contenedor-div">
+                    <label for="apellido" class="">APELLIDOS</label>
+                    <div class="">
+                        <input type="text" class=" input" id="apellido" th:field="*{apellido}" required>
+                    </div>
+                </div>
+                <div class="contenedor-div">
+                    <label for="username" class="">USUARIO</label>
+                    <div class="">
+                        <input type="email" class=" input" id="username" th:field="*{username}" required>
+                    </div>
+                </div>
+                <div class="contenedor-div">
+                    <label for="password" class="">CONTRASEÑA</label>
+                    <div class="contenedor-password">
+                        <input type="password" class=" input" id="password" th:field="*{password}" required>
+                        <div class="figure-password">
+                            <img id="password-eye" onclick="verContraseña()" src="/img/icons/eye-slash-regular.svg" alt="ver contraseña" height="15px">
+                        </div>
+                    </div>
+                </div>
+                <div class="contenedor-div">
+                    <label for="c-password" class="">CONFIRMAR CONTRASEÑA</label>
+                    <div class="">
+                        <input type="password" class=" input" id="c-password" required>
+                    </div>
+                </div>
+                <div class="contenedor-checks">
+                    <div class="form-check">
+                        <input class="form-check-input" name="check_admin" type="checkbox" value="1" id="check_admin">
+                        <label class="form-check-label" for="check_admin">ADMINISTRADOR</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="check_user" type="checkbox" value="2" id="check_user" >
+                        <label class="form-check-label" for="check_user">USUARIO</label>
+                    </div>
+                </div>
+                <div class="contenedor-text">
+                    <a th:href="@{/}" class="link-primary">Iniciar Sesión</a>
+                    <a th:href="@{/Olvide_Contrasenia}" class="link-primary">Olvidé mi contraseña</a>
+                </div>
+                <button type="button" onclick="registrarAction()">REGISTRARSE</button>
+            </form>
+        </section>
+
+        <script type="text/javascript" src="/js/popper.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="/js/validaciones.js"></script>
+    </body>
+</html>

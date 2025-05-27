@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <title alt="Sistema Interventor Pedido">Sistema Interventor Pedido</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/Style_Sis_Interventor_Ped.css">
+
+        <!-- CSS Tabla -->
+        <link rel="stylesheet" href="/css/bootstrap.table.css">
+        <!-- CSS Tabla -->
+    </head>
+
+    <body id="body">
+
+        <!-- Header -->
+        <header id="cabecera" class="row" th:replace="layout/plantilla :: header_inter"></header>
+
+        <!-- Aside -->
+        <aside class=" menu" id="menu_side" th:replace="layout/plantilla :: aside_interventor"></aside>
+
+        <!-- Main -->
+        <main id="contenedor-principal" class="contenedor-principal">
+
+            <section id="contenedor">
+                <div id="contenedor-div" th:if="${errores != null}" >    
+                    <h2 class="">INFORMACION PEDIDO</h2>
+                    <hr>
+                    <div class="alert alert-danger mt-5 mb-5" role="alert">[[${errores}]]</div>
+                    <button type="button"  class="btn btn-primary p-1 mt-5" th:onClick="location.href='/Sis_Interventor_ConsuPe'">Volver</button>
+                </div>
+                <div id="contenedor-div" th:if="${errores == null}">
+                    <h2 class="">INFORMACIÓN PEDIDO</h2>
+                    <hr>
+                    <table id="tabla-pedido" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID Pedido</th>
+                                <th>Nombre Pedido</th>
+                                <th>Tipo Pedido</th>
+                                <th>Fecha Carga</th>
+                                <th>Fecha Aprobacion</th>
+                                <th>Estado Pedido</th>
+                                <th>Total Pedido</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>[[${pedido.getId_pedido()}]]</td>
+                                <td>[[${pedido.getNombre()}]]</td>
+                                <td>[[${pedido.toString()}]]</td>
+                                <td>[[${pedido.getFecha_carga()}]]</td>
+                                <td th:text="${pedido.getFecha_aprobacion()!=null} ? ${pedido.getFecha_aprobacion()} : 'Vacio'"></td>
+                                <td th:style="${pedido.getEstado()=='Pendiente' ? 'background-color:#FE9A05;' : 'background-color:#158C0B;color:white;'}">[[${pedido.getEstado()}]]</td>
+                                <td>[[${pedido.getTotal_pedido()}]]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr>
+                    <div class="d-flex justify-content-around align-items-center">
+                        <div id="div-central" >
+                            <table id="tabla-interventor" class="table table-striped" style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <th>ID Supervisor</th>
+                                        <th>Nombre Supervisor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>[[${pedido.getSupervisor().getId_usuario()}]]</td>
+                                        <td>[[${pedido.getSupervisor().nombre+' '+pedido.getSupervisor().apellido}]]</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div th:if="${insumos != null and !insumos.empty}">
+                            <table id="tabla-insumo" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Descripción</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio Unitario</th>
+                                        <th>Punto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="insumo : ${insumos}">
+                                        <td>[[${insumo.descripcion}]]</td>
+                                        <td>[[${insumo.cantidad}]]</td>
+                                        <td>[[${insumo.precio}]]</td>
+                                        <td>[[${insumo.getPunto().getId_punto()+' - '+insumo.getPunto().getNombre()}]]</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div th:if="${insumos == null or insumos.empty}" class="alert alert-danger" role="alert">
+                            No hay insumos registrados en el pedido. 
+                        </div>
+                    </div>
+                    <div class="d-flex"> 
+                        <button class="btn btn-primary p-1 m-2" th:attr="onClick=|descargarReporteInter(${pedido.getId_pedido()})|">Descargar Reporte</button>
+                        <a th:if="${pedido.getEstado()!='Aprobado'}" class="btn btn-primary p-1 m-2" th:href="@{/aprobarPedido/}+ ${pedido.getId_pedido()}">Aprobar</a>
+                        <a th:if="${pedido.getEstado()!='Aprobado'}" class="btn btn-primary p-1 m-2" th:href="@{/eliminarPedidoInter/}+ ${pedido.getId_pedido()}">Rechazar</a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer id="footer">
+            <h4 class="titulo-final ">&copy; SISTEMA DE PEDIDOS 2021</h4>
+        </footer>
+
+        <script type="text/javascript" src="/js/popper.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="/js/menu.js"></script>
+
+        <!-- JS Tabla -->
+        <script type="text/javascript" src="/js/jquery.datatable.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.table.js"></script>
+        <!-- JS Tabla2 -->
+        <script type="text/javascript" src="/js/jquery.datatable.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.table.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#tabla-insumo').DataTable();
+            });
+        </script>
+    </body>
+
+</html>

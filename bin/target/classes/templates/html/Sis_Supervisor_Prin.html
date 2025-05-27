@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title alt="Sistema Supervisor Principal">Sistema Supervisor Principal</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/Style_Sis_Supervisor_Prin.css">
+</head>
+
+<body id="body">
+    
+    <!-- Header -->
+    <header id="cabecera" class="row" th:replace="layout/plantilla :: header_super"></header>
+    
+    <!-- Aside -->
+    <aside class=" menu" id="menu_side" th:replace="layout/plantilla :: aside_supervisor"></aside>
+    
+    <!-- Main -->
+    <main id="contenedor-principal" class="contenedor-principal"> 
+        
+        <section id="contenedor">
+            <div id="contenedor-div">
+                <h2 class="">INICIO</h2>
+                <hr>
+                <section class="contenedor-div-section" id="contenedor-div-section">
+                    <div class="div-figure">
+                        <figure class="contenedor-figure">
+                            <img id="user_img" th:src="@{${usuario.getFoto()}}" alt="user">
+                        </figure>
+                    </div>
+                    <div class="div-info">
+                        <h1 class="">SUPERVISOR</h1>
+                        <h3 class="" th:text="${usuario.getNombre()+' '+usuario.getApellido()}"></h3>
+                        <h5 class=""><a th:href="'mailto:'+${usuario.getUsername()}" th:text="${usuario.getUsername()}"></a></h5>
+                    </div>
+                </section>
+                <hr>
+                <div id="botoncillos">
+                    <button type="button" class="fig-button" th:onClick="location.href='/Sis_Supervisor_CargarPedido/0'">
+                        <div>
+                            <p>CARGAR <br>PEDIDO</p>
+                            <i><img src="/img/icons/subir.svg" alt="CARGAR" height="40px"></i>
+                        </div>
+                        <figure class="fig-button-triangulo"></figure>
+                    </button>
+
+                    <button type="button" class="fig-button" onclick="location.href='/html/Sis_Supervisor_Lista.html'">
+                        <div>
+                            <p>GESTIONAR <br>PEDIDOS</p>
+                            <i><img class="ordenar-img" src="/img/icons/orden.svg" alt="SUBIR" height="50px"></i>
+                        </div>
+                        <figure class="fig-button-triangulo"></figure>
+                    </button>
+
+                    <button type="button" class="fig-button" th:onClick="location.href='/Sis_Supervisor_ConsuPe'">
+                        <div>
+                            <p>CONSULTAR <br>PEDIDO</p>
+                            <i><img src="/img/icons/consulta.svg" alt="CONSULTAR" height="40px"></i>
+                        </div>
+                        <figure class="fig-button-triangulo"></figure>
+                    </button>
+
+                    <button type="button" class="fig-button" th:onClick="location.href='/Sis_Supervisor_DesPedido'">
+                        <div>
+                            <p>DESCARGAR <br>REPORTE</p>
+                            <i><img src="/img/icons/flecha-hacia-abajo.svg" alt="DESCARGAR" height="40px"></i>
+                        </div>
+                        <figure class="fig-button-triangulo"></figure>
+                    </button>
+                </div>
+            </div>
+            
+        </section>
+    </main>
+    <footer id="footer">
+        <h4 class="titulo-final ">&copy; SISTEMA DE PEDIDOS 2021</h4>
+    </footer>
+    <script type="text/javascript" src="/js/popper.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/js/menu.js"></script>
+</body>
+
+</html>

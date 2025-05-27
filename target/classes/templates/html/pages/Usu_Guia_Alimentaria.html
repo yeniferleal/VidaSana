@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title alt="Guia Alimentaria">Guia Alimentaria</title>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/Style_Plantilla.css">
+	<link rel="stylesheet" href="/css/Style_Page.css">
+</head>
+
+<body id="body">
+
+	<!-- Header -->
+	<template th:replace="layout/plantilla :: header_user"></template>
+
+	<!-- Aside -->
+	<template th:replace="layout/plantilla :: aside_user"></template>
+
+	<!-- Main -->
+	<main id="contenedor-principal" class="contenedor-principal">
+
+		<section id="contenedor">
+			<div id="contenedor-div">
+				<h2 class="">GUIA ALIMENTARIA</h2>
+				<hr>
+				<section class="contenedor-div-section" id="contenedor-div-section">
+					<h4>Carbohidratos</h4>
+					<br>
+					<h6>¿Qué son los carbohidratos?</h6>
+					<br>
+					<p>
+						Los carbohidratos son nutrientes que dan energía al cuerpo. Son la principal fuente de
+						combustible para el cerebro y los
+						músculos.
+					</p>
+
+					<dl>
+						<dt>Tipos de carbohidratos:</dt>
+						<dd>
+							<ol>
+								<li>Simples:</li>
+								<p>Se digieren rápido.Dan energía rápida.Ejemplos: azúcar, miel, dulces, frutas.</p>
+								<img class="img_large" src="/img/pages/guia_alimentaria/simples.png" alt="simples">
+								<li>Complejos</li>
+								<p>Se digieren lento. Dan energía por más tiempo. Ejemplos: arroz, pan integral, papa,
+									lentejas.</p>
+								<img class="img_large" src="/img/pages/guia_alimentaria/complejos.png" alt="complejos">
+								<li>Milk</li>
+							</ol>
+						</dd>
+					</dl>
+
+					<h4>Proteinas</h4>
+					<br>
+					<h6>¿Qué son las proteínas y cuáles son?</h6>
+					<br>
+					<p>
+						Las proteínas ayudan a formar y reparar los músculos, órganos y tejidos. Son esenciales para el
+						crecimiento.
+						Ejemplos de proteínas:
+					</p>
+
+					<ul>
+						<li>Carne, pollo, pescado:</li>
+						<img class="img_medium" src="/img/pages/guia_alimentaria/proteinas_1.png" alt="proteinas_1">
+						<li>Huevos:</li>
+						<img class="img_medium" src="/img/pages/guia_alimentaria/proteinas_2.png" alt="proteinas_2">
+						<li>Lácteos (leche, queso, yogur):</li>
+						<img class="img_medium" src="/img/pages/guia_alimentaria/proteinas_3.png" alt="proteinas_3">
+						<li>Nueces:</li>
+						<img class="img_medium" src="/img/pages/guia_alimentaria/proteinas_4.png" alt="proteinas_4">
+					</ul>
+
+					<h4>Verduras</h4>
+					<br>
+					<h6>¿Qué son las verduras y cuáles son?</h6>
+					<br>
+					<p>
+						Las verduras son alimentos de origen vegetal ricos en vitaminas, minerales y fibra. Ayudan a
+						mantener el cuerpo sano.
+						Ejemplos de verduras:
+					</p>
+
+					<ul>
+						<li>Espinaca, lechuga, tomate:</li>
+						<img class="img_medium" src="/img/pages/guia_alimentaria/verduras_1.png" alt="verduras_1">
+						<li>Zanahoria, brócoli, coliflor:</li>
+						<img class="img_medium" src="/img/pages/guia_alimentaria/verduras_2.png" alt="verduras_2">
+						<li>Tomate, pepino, cebolla:</li>
+						<img class="img_medium" src="/img/pages/guia_alimentaria/verduras_3.png" alt="verduras_3">
+						<li>Pimentón, remolacha, calabacín:</li>
+						<img class="img_medium" src="/img/pages/guia_alimentaria/verduras_4.png" alt="verduras_4">
+					</ul>
+
+					<h4>Grasas Saludables</h4>
+					<br>
+					<h6>¿Qué son las grasas saludables y cuáles son?</h6>
+					<br>
+					<p>
+						Son tipos de grasa que benefician al corazón y al cerebro. Ayudan a absorber vitaminas y dan
+						energía.
+						Ejemplos de grasas saludables:
+					</p>
+
+					<ul>
+						<li>Aguacate:</li>
+						<img class="img_medium" src="/img/pages/guia_alimentaria/grasas_saludables_1.png" alt="grasas_saludables_1">
+						<li>Aceite de oliva o coco:</li>
+						<img class="img_medium" src="/img/pages/guia_alimentaria/grasas_saludables_2.png" alt="grasas_saludables_2">
+						<li>Frutos secos (nueces, almendras):</li>
+						<img class="img_medium" src="/img/pages/guia_alimentaria/grasas_saludables_3.png" alt="grasas_saludables_3">
+						<li>Semillas (chía, linaza):</li>
+						<img class="img_medium" src="/img/pages/guia_alimentaria/grasas_saludables_4.png" alt="grasas_saludables_4">
+						<li>Pescados grasos (salmón, atún):</li>
+						<img class="img_medium" src="/img/pages/guia_alimentaria/grasas_saludables_5.png" alt="grasas_saludables_5">
+					</ul>
+				</section>
+				<hr>
+			</div>
+
+		</section>
+	</main>
+
+	<template th:replace="layout/plantilla :: footer"></template>
+
+	<script type="text/javascript" src="/js/popper.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.js"></script>
+	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+	<script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="/js/menu.js"></script>
+</body>
+
+</html>

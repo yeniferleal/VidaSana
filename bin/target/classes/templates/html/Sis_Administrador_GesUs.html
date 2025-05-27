@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <title alt="Sistema Administrador Gestionar Usuario">Sistema Administrador Gestionar Usuario</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/Style_Sis_Administrador_Are.css">
+
+        <!-- CSS Tabla -->
+        <link rel="stylesheet" href="/css/bootstrap.table.css">
+        <!-- CSS Tabla -->
+
+    </head>
+
+    <body id="body">
+
+        <!-- Header -->
+        <header id="cabecera" class="row" th:replace="layout/plantilla :: header_admin"></header>
+
+        <!-- Aside -->
+        <aside class=" menu" id="menu_side" th:replace="layout/plantilla :: aside_admin"></aside>
+
+        <!-- Main -->
+        <main id="contenedor-principal" class="contenedor-principal">
+            <section id="contenedor">
+                <div>
+                    <h2 class="">GESTIONAR USUARIOS</h2>
+                    <hr>
+                </div>
+                <div id="contenedor-div" th:if="${usuarios != null and !usuarios.empty}">
+                    <table id="example" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Tipo</th>
+                                <th>Foto</th>
+                                <th>Correo</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="usuario : ${usuarios}">
+                                <td th:text="${usuario.id_usuario}"></td>
+                                <td th:text="${usuario.nombre}"></td>
+                                <td th:text="${usuario.apellido}"></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button id="dropdown-button" class="btn btn-secondary dropdown-toggle" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                            Roles
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                            <li th:each='rol : ${usuario.getRoles()}' th:if="${rol.getTipo_rol().equals('ROLE_ADMINISTRADOR')}"><a class="dropdown-item" th:text='${rol.toString()}'></a></li>
+                                            <li th:each='rol : ${usuario.getRoles()}' th:if="${rol.getTipo_rol().equals('ROLE_SUPERVISOR')}"><a class="dropdown-item" th:text='${rol.toString()}'></a></li>
+                                            <li th:each='rol : ${usuario.getRoles()}' th:if="${rol.getTipo_rol().equals('ROLE_INTERVENTOR')}"><a class="dropdown-item" th:text='${rol.toString()}'></a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <th><a th:href="${usuario.getFoto()}" target="_blank" class="link-primary">Foto</a></th>
+                                <td th:text="${usuario.username}"></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button id="dropdown-button" class="btn btn-secondary dropdown-toggle" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                            Opciones
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                            <li><button class="dropdown-item text-center" th:attr="onclick=|modificarUsuario('${usuario.getId_usuario()}')|">Modificar</button></li>
+                                            <li><button class="dropdown-item text-center    " th:attr="onclick=|deleteUsuario('${usuario.getId_usuario()}','${usuario.getFoto()}')|">Eliminar</button></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+                <div th:if="${usuarios == null or usuarios.empty}" class="alert alert-danger" role="alert">
+                    No hay usuarios registrados en el sistema. 
+                </div>
+            </section>
+        </main>
+
+        <footer id="footer">
+            <h4 class="titulo-final ">&copy; SISTEMA DE PEDIDOS 2021</h4>
+        </footer>
+
+
+        <script type="text/javascript" src="/js/popper.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="/js/menu.js"></script>
+
+        <!-- JS Tabla -->
+        <script type="text/javascript" src="/js/jquery.datatable.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.table.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#example').DataTable();
+            });
+        </script>
+        <!-- JS Tabla -->
+        <script type="text/javascript" src="/js/firebase-app.js"></script>
+        <script type="text/javascript" src="/js/firebase-auth.js"></script>
+        <script type="text/javascript" src="/js/firebase-storage.js"></script>
+        <script type="text/javascript" src="/js/firebase.js"></script>
+        <script type="text/javascript" src="/js/validaciones.js"></script>
+    </body>
+
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title alt="Registrar Niños">Registrar Niños</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/Style_Plantilla.css">
+    <link rel="stylesheet" href="/css/Style_Sis_Prin.css">
+
+    <!-- CSS Tabla -->
+    <link rel="stylesheet" href="/css/bootstrap.table.css">
+    <!-- CSS Tabla -->
+</head>
+
+<body id="body">
+
+    <!-- Header -->
+    <template th:replace="layout/plantilla :: header_admin"></template>
+
+    <!-- Aside -->
+    <template class=" menu" id="menu_side" th:replace="layout/plantilla :: aside_admin"></template>
+
+    <!-- Main -->
+    <main id="contenedor-principal" class="contenedor-principal">
+        <div id="contenedor">
+            <div id="contenedor-div">
+                <h2 class="">LISTA DE ACTIVIDADES FISICAS</h2>
+                <hr>
+
+                <div class="contenedor-div-button">
+					<button type="button" class="btn btn-success" disabled  th:onClick="location.href='/Sis_Administrador_Agregar_Actividad'">Agregar</button>
+				</div>
+                <section class="contenedor-div-section" id="contenedor-div-section"
+                    th:if="${actividades != null and !actividades.empty}">
+                    <table id="tabla-pedido" class="table table-striped" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Día</th>
+                                <th>Frecuencia</th>
+                                <th>Duración</th>
+                                <th>Clasificación</th>
+                                <th>Video</th>
+                                <th>Descripción</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="actividad : ${actividades}">
+                                <td th:text="${actividad.getId_actividad()}"></td>
+                                <td th:text="${actividad.getNombre()}"></td>
+                                <td th:text="${actividad.getDia()}"></td>
+                                <td th:text="${actividad.getFrecuencia()}"></td>
+                                <td th:text="${actividad.getDuracion()}"></td>
+                                <td th:text="${actividad.getClasificacion()}"></td>
+                                <td th:text="${actividad.getVideo()}"></td>
+                                <td th:utext="${actividad.getDescripcion()}"></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button id="dropdown-button" class="btn btn-secondary dropdown-toggle"
+                                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Opciones
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-dark"
+                                            aria-labelledby="dropdownMenuButton2">
+                                            <li>
+                                                <a aria-disabled="true" class="dropdown-item" th:href="@{/eliminarActividad/}+ ${actividad.getId_actividad()}">Eliminar</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <div th:if="${actividades == null or actividades.empty}" class="alert alert-danger" role="alert">
+                    No hay actividades registradas en el sistema.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <template th:replace="layout/plantilla :: footer"></template>
+
+    <script type="text/javascript" src="/js/popper.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/js/menu.js"></script>
+
+    <!-- JS Tabla -->
+    <script type="text/javascript" src="/js/jquery.datatable.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.table.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tabla-pedido').DataTable();
+        });
+    </script>
+    <!-- JS Tabla -->
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title alt="Registrar Niños">Registrar Niños</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/Style_Plantilla.css">
+    <link rel="stylesheet" href="/css/Style_Sis_Prin.css">
+
+    <!-- CSS Tabla -->
+    <link rel="stylesheet" href="/css/bootstrap.table.css">
+    <!-- CSS Tabla -->
+</head>
+
+<body id="body">
+
+    <!-- Header -->
+    <template th:replace="layout/plantilla :: header_user"></template>
+
+    <!-- Aside -->
+    <template class=" menu" id="menu_side" th:replace="layout/plantilla :: aside_user"></template>
+
+    <!-- Main -->
+    <main id="contenedor-principal" class="contenedor-principal">
+        <div id="contenedor">
+            <div id="contenedor-div">
+                <h2 class="">LISTA DE NIÑOS(AS)</h2>
+                <hr>
+
+                <div class="contenedor-div-button">
+					<button type="button" class="btn btn-success"  th:onClick="location.href='/Sis_Usuario_Agregar_Persona'">Agregar</button>
+				</div>
+                <section class="contenedor-div-section" id="contenedor-div-section"
+                    th:if="${personas != null and !personas.empty}">
+                    <table id="tabla-pedido" class="table table-striped" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Fecha Nacimiento</th>
+                                <th>Genero</th>
+                                <th>Edad (Años)</th>
+                                <th>Peso (KG)</th>
+                                <th>Altura (CM)</th>
+                                <th>Grado Escolaridad</th>
+                                <th>Alergias</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="persona : ${personas}">
+                                <td th:text="${persona.getId_persona()}"></td>
+                                <td th:text="${persona.getNombre()}"></td>
+                                <td th:text="${persona.getApellido()}"></td>
+                                <td th:text="${persona.getFecha_nacimiento()}"></td>
+                                <td th:text="${persona.getGenero()}"></td>
+                                <td th:text="${persona.getEdad()}"></td>
+                                <td th:text="${persona.getPeso()}"></td>
+                                <td th:text="${persona.getAltura()}"></td>
+                                <td th:text="${persona.getGrado_escolaridad()}"></td>
+                                <td th:text="${persona.getAlergias()}"></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button id="dropdown-button" class="btn btn-secondary dropdown-toggle"
+                                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Opciones
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-dark"
+                                            aria-labelledby="dropdownMenuButton2">
+                                            <li>
+                                                <a class="dropdown-item" th:href="@{/eliminarPersona/}+ ${persona.getId_persona()}">Eliminar</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <div th:if="${personas == null or personas.empty}" class="alert alert-danger" role="alert">
+                    No hay niños registrados en el sistema.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <template th:replace="layout/plantilla :: footer"></template>
+
+    <script type="text/javascript" src="/js/popper.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/js/menu.js"></script>
+
+    <!-- JS Tabla -->
+    <script type="text/javascript" src="/js/jquery.datatable.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.table.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tabla-pedido').DataTable();
+        });
+    </script>
+    <!-- JS Tabla -->
+</body>
+
+</html>

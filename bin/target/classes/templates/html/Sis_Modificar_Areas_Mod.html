@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <title alt="Sistema Administrador Actualizar Area">Actualizar Area</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/Style_Sis_Administrador_Are.css">
+
+        <!-- CSS Tabla -->
+        <link rel="stylesheet" href="/css/bootstrap.table.css">
+        <!-- CSS Tabla -->
+
+    </head>
+
+    <body id="body">
+
+        <!-- Header -->
+        <header id="cabecera" class="row" th:replace="layout/plantilla :: header_admin"></header>
+
+        <!-- Aside -->
+        <aside class=" menu" id="menu_side" th:replace="layout/plantilla :: aside_admin"></aside>
+
+        <!-- Main -->
+        <main id="contenedor-principal" class="contenedor-principal">
+            <section id="contenedor">
+                <div>
+                    <h2 class="">ACTUALIZAR AREA</h2>
+                    <hr>
+                </div>
+                <div id="contenedor-div">
+                    <div th:if="${errores != null}" >    
+                        <div class="alert alert-danger" role="alert">[[${errores}]]</div>
+                        <a class="btn btn-primary p-1 mt-2" th:href="@{/Sis_Modificar_Areas_Mod/}+${area.id_area}">Volver</a>
+                    </div>
+                    <form  class="form-insumos col-6" th:if="${errores == null}" th:action="@{/modificarArea}" method="post" th:object="${area}">
+                        <input type="hidden" name="id_area" th:field="*{id_area}">
+
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="descripcion" class="form-label">Descripcion</label>
+                            <textarea type="text" class="form-control" id="descripcion" th:field="*{descripcion}" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ubicacion" class="form-label">Ubicacion</label>
+                            <input type="text" class="form-control" id="ubicacion" th:field="*{ubicacion}" required>
+                        </div>
+                        <div class="contenedor-buttons mx-auto mt-3">
+                            <button type="submit"  class="btn btn-primary p-1">Actualizar</button>
+                        </div>
+                    </form>
+
+                </div>
+            </section>
+        </main>
+
+        <footer id="footer">
+            <h4 class="titulo-final ">&copy; SISTEMA DE PEDIDOS 2021</h4>
+        </footer>
+
+
+        <script type="text/javascript" src="/js/popper.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="/js/menu.js"></script>
+    </body>
+
+</html>

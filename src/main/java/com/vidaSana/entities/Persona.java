@@ -56,4 +56,5 @@ public class Persona implements Serializable{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
+    
 }

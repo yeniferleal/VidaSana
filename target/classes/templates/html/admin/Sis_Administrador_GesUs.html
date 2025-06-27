@@ -58,10 +58,7 @@
 												th:if="${rol.getTipo_rol().equals('ROLE_ADMINISTRADOR')}"><a
 													class="dropdown-item" th:text='${rol.toString()}'></a></li>
 											<li th:each='rol : ${usuario.getRoles()}'
-												th:if="${rol.getTipo_rol().equals('ROLE_SUPERVISOR')}"><a
-													class="dropdown-item" th:text='${rol.toString()}'></a></li>
-											<li th:each='rol : ${usuario.getRoles()}'
-												th:if="${rol.getTipo_rol().equals('ROLE_INTERVENTOR')}"><a
+												th:if="${rol.getTipo_rol().equals('ROLE_USUARIO')}"><a
 													class="dropdown-item" th:text='${rol.toString()}'></a></li>
 										</ul>
 									</div>

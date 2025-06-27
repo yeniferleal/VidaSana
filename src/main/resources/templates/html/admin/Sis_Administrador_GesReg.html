@@ -59,10 +59,7 @@
 												th:if="${rol.getTipo_rol().equals('ROLE_ADMINISTRADOR')}"><a
 													class="dropdown-item" th:text='${rol.toString()}'></a></li>
 											<li th:each='rol : ${solicitud.getSolicitudRoles()}'
-												th:if="${rol.getTipo_rol().equals('ROLE_SUPERVISOR')}"><a
-													class="dropdown-item" th:text='${rol.toString()}'></a></li>
-											<li th:each='rol : ${solicitud.getSolicitudRoles()}'
-												th:if="${rol.getTipo_rol().equals('ROLE_INTERVENTOR')}"><a
+												th:if="${rol.getTipo_rol().equals('ROLE_USUARIO')}"><a
 													class="dropdown-item" th:text='${rol.toString()}'></a></li>
 										</ul>
 									</div>
@@ -119,10 +116,6 @@
 		});
 	</script>
 	<!-- JS Tabla -->
-	<script type="text/javascript" src="/js/firebase-app.js"></script>
-	<script type="text/javascript" src="/js/firebase-auth.js"></script>
-	<script type="text/javascript" src="/js/firebase-storage.js"></script>
-	<script type="text/javascript" src="/js/firebase.js"></script>
 	<script type="text/javascript" src="/js/validaciones.js"></script>
 </body>
 

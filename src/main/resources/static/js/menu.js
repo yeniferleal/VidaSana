@@ -1,32 +1,3 @@
-function selectDisable() {
-    let select = document.getElementById("select-tipo");
-    select.setAttribute("disabled", "disabled");
-}
-
-function more() {
-    let cant = document.getElementById("cantidad-insumo");
-    cant.value++;
-}
-
-function less() {
-    let cant = document.getElementById("cantidad-insumo");
-    if (cant.value - 1 > -1) {
-        cant.value--;
-    } else {
-        alert("La cantidad no puede ser negativa.");
-    }
-}
-
-function buscarPedidoInter(){
-    let id_pedido = document.getElementById("id_pedido");
-    if(id_pedido.value!==""){
-        document.form_buscar.action="/verPedidoInter/"+id_pedido.value;
-        document.form_buscar.submit();
-    }else{
-        alert("Campos vacios.");
-    }
-}
-
 let cargo = document.querySelector(".menu-cargo").getAttribute("value");
 document.querySelectorAll("#sub-dropdown-menu li").forEach((item) => {
 	if(item.getAttribute("value")===cargo){
@@ -40,14 +11,10 @@ document.querySelectorAll("#sub-dropdown-menu li").forEach((item) => {
 
 var menuCerrado = false;
 var tamañoPage = 0;
+var menuInformacion = "";
 
 function menu() {
     if (tamañoPage > 600 || tamañoPage == 0) {
-        if (menuCerrado == false) {
-            menuCerrado = true;
-        } else {
-            menuCerrado = false;
-        }
         const text_nav = document.getElementById("texto-nav");
         text_nav.classList.toggle("texto-nav_move");
         const menu_img = document.querySelector(".user-aside_img");
@@ -76,6 +43,12 @@ function menu() {
 
         const footer = document.getElementById("footer");
 
+		if (menuCerrado == false) {
+			menuInformacion = menu_info.innerHTML;
+            menuCerrado = true;
+        } else {
+            menuCerrado = false;
+        }
 
         if (window.innerWidth > 600) {
             if (menuCerrado == true) {
@@ -86,18 +59,19 @@ function menu() {
                 footer.classList.toggle("footer_desactive");
             }
         }
+        
 
         switch (cargo) {
             case "USUARIO":
                 if (menu_info.innerHTML === "") {
-                    menu_info.innerHTML = '<h4 class="menu-text-user my-2">USUARIO</h4><h5 class="menu-cargo my-2">USUARIO</h5><h6 class="menu-text-email my-2"><a href="mailto:user@gmail.com">user@gmail.com</a></h6>';
+                    menu_info.innerHTML = menuInformacion;
                 } else {
                     menu_info.innerHTML = ""
                 }
                 break;
             case "ADMINISTRADOR":
                 if (menu_info.innerHTML === "") {
-                    menu_info.innerHTML = '<h4 class="menu-text-user my-2">USUARIO</h4><h5 class="menu-cargo my-2">ADMINISTRADOR</h5><h6 class="menu-text-email my-2"><a href="mailto:user@gmail.com">user@gmail.com</a></h6>';
+                    menu_info.innerHTML = menuInformacion;
                 } else {
                     menu_info.innerHTML = ""
                 }
@@ -122,12 +96,4 @@ window.addEventListener("resize", function () {
 if (window.innerWidth < 600) {
     const footer = document.getElementById("footer");
     footer.classList.add("footer_600");
-}
-
-function descargarReporteSuper(id_pedido){
-    window.open("/verPedidoSuper/" + id_pedido + "?format=pdf","_blank");
-}
-
-function descargarReporteInter(id_pedido){
-    window.open("/verPedidoInter/" + id_pedido + "?format=pdf","_blank");
 }

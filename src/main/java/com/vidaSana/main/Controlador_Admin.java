@@ -120,7 +120,7 @@ public class Controlador_Admin {
         model.addAttribute("usuario", aux);
         usuario = usuarioService.findById(usuario.getId_usuario());
         model.addAttribute("usuarioAux", usuario);
-        return "html/admin/Editar_User";
+        return "html/admin/Editar_User"; 
     }
 
     @PostMapping("/guardarUsuario")

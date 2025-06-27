@@ -7,6 +7,15 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/Style_Plantilla.css">
     <link rel="stylesheet" href="/css/Style_Sis_Prin.css">
+    
+    <style>
+		.fondo {
+			background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('../img/background.png');
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: center center;
+		}
+	</style>
 </head>
 
 <body id="body">
@@ -18,7 +27,7 @@
     <template th:replace="layout/plantilla :: aside_user"></template>
         
     <!-- Main -->
-    <main id="contenedor-principal" class="contenedor-principal"> 
+    <main id="contenedor-principal" class="contenedor-principal fondo"> 
         
         <section id="contenedor">
             <div id="contenedor-div">

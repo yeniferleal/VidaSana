@@ -3,6 +3,7 @@
     --green: green;
     --footer: #D4D4D4;
     --menu: #F6F5F5;
+    --color-menu: #f4f6f6 ;
 }
 
 * {
@@ -186,7 +187,7 @@ hr{
 .menu{
     padding: 0;
     min-height: calc(100vh - 65px);
-    background-color: var(--menu);
+    background-color: var(--color-menu);
     width: 20%;
     position: fixed;
     z-index: 100;

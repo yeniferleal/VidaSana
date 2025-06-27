@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title alt="Editar Usuario">Editar Usuario</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/Style_Editar_User.css">
+
+<body>
+    <section class="contenedor-principal">
+        <h3>EDITAR USUARIO</h3>
+        <form class="formulario" name="formulario" method="post" th:action="@{/guardarUsuario}" th:object="${usuarioAux}">
+            <input type="text" id="id_usuario" th:value="${usuarioAux.getId_usuario()}" th:field="*{id_usuario}" hidden="true">
+            <div class="contenedor-div">
+                <label for="nombre" class="">NOMBRES</label>
+                <div class="">
+                    <input type="text" class=" input" id="nombre" th:field="*{nombre}">
+                </div>
+            </div>
+            <div class="contenedor-div">
+                <label for="apellido" class="">APELLIDOS</label>
+                <div class="">
+                    <input type="text" class=" input" id="apellido" th:field="*{apellido}">
+                </div>
+            </div>
+            <div class="contenedor-div">
+                <label for="username" class="">USUARIO(CORREO)</label>
+                <div class="">
+                    <input type="email" class=" input" id="username" th:field="*{username}">
+                </div>
+            </div>
+            <div class="contenedor-div">
+                <label for="password" class="">CONTRASEÑA</label>
+                <div class="contenedor-password">
+                    <input type="password" class=" input" id="password" th:field="*{password}">
+                    <div class="figure-password">
+                        <img id="password-eye" onclick="verContraseña()" src="/img/icons/eye-slash-regular.svg" alt="ver contraseña" height="15px">
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-div">
+                <label for="c-password" class="">CONFIRMAR CONTRASEÑA</label>
+                <div class="">
+                    <input type="password" class=" input" id="c-password">
+                </div>
+            </div>
+            <div class="contenedor-botones">
+            <button type="button" class="registrarse-btn" onclick="modificarAction()">ACEPTAR</button>
+            <button type="button" class="" onclick="location.href='/Sis_Administrador_GesUs'">CANCELAR</button>
+            </div>
+        </form>
+    </section>
+
+    <script type="text/javascript" src="/js/popper.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/js/validaciones.js"></script>
+</body>
+
+</html>

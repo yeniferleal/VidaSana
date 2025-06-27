@@ -44,10 +44,10 @@ public class ControladorInicio {
 
         for (GrantedAuthority role : roles) {
             if (role.getAuthority().equals("ROLE_ADMINISTRADOR")) {
-                return "html/Sis_Administrador_Prin";
+                return "html/admin/Sis_Administrador_Prin";
             }
             if (role.getAuthority().equals("ROLE_USUARIO")) {
-                return "html/Sis_Usuario_Prin";
+                return "html/usuario/Sis_Usuario_Prin";
             }
         }
         return "login";
@@ -57,14 +57,14 @@ public class ControladorInicio {
     public String Administrador(Model model, HttpSession session){
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         model.addAttribute("usuario", usuario);
-        return "html/Sis_Administrador_Prin";
+        return "html/admin/Sis_Administrador_Prin";
     }
     
     @GetMapping("/Sis_Usuario_Prin")
     public String Usuario(Model model, HttpSession session){
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         model.addAttribute("usuario", usuario);
-        return "html/Sis_Usuario_Prin";
+        return "html/usuario/Sis_Usuario_Prin";
     }
 
     @GetMapping("/sign_in")
